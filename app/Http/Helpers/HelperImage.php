@@ -17,9 +17,8 @@ class HelperImage
     const PATH_IMAGES = 'public/images/';
 
     /**
-     * работа с сохранением изображения
      * @param $image
-     * @return bool
+     * @return mixed
      */
     public static function handleImage($image)
     {
@@ -30,18 +29,18 @@ class HelperImage
 
             # проверяем существует ли директория, если нет - создаем с правами
             if (file_exists($path)) {
-
-                 return $image->move($path, $filename);
+                $image->move($path, $filename);
 
             } else {
                 # создаем директорию
                 $makeDir = Storage::makeDirectory(self::PATH_IMAGES, 0755, true);
 
                 if ($makeDir == true) {
-
-                    return $image->move($path, $filename);
+                    $image->move($path, $filename);
                 }
             }
-        }
+
+            return $filename;
+    }
 
 }

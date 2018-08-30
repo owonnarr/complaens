@@ -39,6 +39,9 @@ class ImageController extends Controller
         $image = $request->file('image');
 
         $aData['image'] = HelperImage::handleImage($image);
+        $aData['font'] = 'Aria';
+        $aData['watermark'] = 'template';
+
         if ($aData['image'] !== false && $aData['image'] !== null) {
             Image::create($aData);
 
