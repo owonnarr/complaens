@@ -8,36 +8,40 @@
 
 namespace App\Http\Helpers;
 use App\Image as Img;
-use Image;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class HelperImage
 {
-    const PATH_IMAGES = '/images/photos/';
-    const SIZE_M = 'images/photos/';
+    const PATH_IMAGES = 'public/images/';
 
     /**
-     * проверка на существование директории
-     * @param string $path
+     * работа с сохранением изображения
+     * @param $image
      * @return bool
      */
     public static function handleImage($image)
     {
-        # путь к папке для сохранения изображений
-        $path = public_path().self::PATH_IMAGES;
+            # хешируем имя изображения для записи в бд
+            $filename = $image->hashName();
 
-        # хешируем имя изображения для записи в бд
-        $imageName = $image->hashName();
+            $path = storage_path().'/app/'.self::PATH_IMAGES;
 
-        # проверяем существует ли директория, если нет - создаем с правами
-        if (!is_dir($path)) {
+            # проверяем существует ли директория, если нет - создаем с правами
+            if (file_exists($path)) {
 
-            mkdir($path, 0775);
-            # перемещаем изображение с временной папки tmp для сохранения
-            $image->move($path, $imageName);
-        } else {
-            return false;
+                 return $image->move($path, $filename);
+
+            } else {
+                # создаем директорию
+                $makeDir = Storage::makeDirectory(self::PATH_IMAGES, 0755, true);
+
+                if ($makeDir == true) {
+
+                    return $image->move($path, $filename);
+                }
+            }
         }
-    }
 
 }

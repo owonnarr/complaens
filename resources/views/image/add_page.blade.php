@@ -13,15 +13,16 @@
             </div>
             <div class="col-md-4" >
                 <form id="form" action="{{route('uploads')}}" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="_token" value="{{ csrf_token() }}" hidden>
+                    <input type="text" name="_token" value="{{ csrf_token()}}" hidden>
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Название фотографии</label>
-                        <input type="text" class="form-control" name="title" placeholder="название фотографии" value="{{ old('title') }}">
+                        <input type="text" class="form-control" name="name" placeholder="название фотографии" value="{{ old('title') }}">
 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Описание фотографии</label>
-                        <textarea type="text" class="form-control" name="decription" placeholder="описание фотографии" required>{{ old('decription') }}</textarea>
+                        <textarea type="text" class="form-control" name="description" placeholder="описание фотографии" required>{{ old('decription') }}</textarea>
                     </div>
                     <div class="form-group">
                         <input type="file" name="image" id="file">
