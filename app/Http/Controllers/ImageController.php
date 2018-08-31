@@ -34,6 +34,8 @@ class ImageController extends Controller
         # валидация
         $this->validate($request, $aRules);
 
+
+
         $aData = [];
         $aData = $request->all();
 
@@ -45,9 +47,9 @@ class ImageController extends Controller
         $aData['watermark'] = 'template';
 
         if ($aData['image'] !== false && $aData['image'] !== null) {
-            Image::create($aData);
+            $id = Image::create($aData)->id;
+            return redirect('show'."/{$id}");
 
-            return redirect(route('home'));
         } else {
             echo 'Ошибка при сохранении изображения';
         }
