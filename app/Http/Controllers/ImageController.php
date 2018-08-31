@@ -5,20 +5,22 @@ namespace App\Http\Controllers;
 use App\Image;
 use App\Http\Helpers\HelperImage;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function form()
     {
         return view('image.add_page');
     }
 
     /**
-     * загрузка изображений
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
 
     public function upload(Request $request)
@@ -52,8 +54,22 @@ class ImageController extends Controller
 
     }
 
-    public function show()
+    /**
+     * @param $id
+     */
+
+    public function show($id)
     {
 
+        $oImg = new Image();
+        $img = $oImg->getImage($id);
+
+//        dd(Storage::url($img->image));
+
+        if (is_object($img)) {
+            return view('image.view_page', [
+                'image' => $img
+            ]);
+        }
     }
 }

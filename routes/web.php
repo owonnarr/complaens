@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Route::post('/uploads', 'ImageController@upload')->name('uploads');
 Route::get('/uploads', 'ImageController@form')->name('form');
-Route::get('/show/{image}', 'ImageController@showImage')->name('show');
+Route::get('/show/{id}', 'ImageController@show')->name('show');
