@@ -8,6 +8,9 @@
             <div class="caption">
                 <h3><?php echo (!empty($image)) ? $image->name : "Без названия" ?></h3>
                 <p><?php echo (!empty($image)) ? $image->description : "Без описания" ?></p>
+                <hr>
+                <h5>Поделиться в соц.сетях</h5>
+                <?php echo $share; ?>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Image;
 use App\Http\Helpers\HelperImage;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Storage;
+use Share;
 
 class ImageController extends Controller
 {
@@ -68,7 +69,12 @@ class ImageController extends Controller
 
         if (is_object($img)) {
             return view('image.view_page', [
-                'image' => $img
+                'image' => $img,
+                'share' => Share::page('http://jorenvanhocht.be', 'Поделиться')
+                    ->facebook('fa-3x')
+                    ->twitter()
+                    ->googlePlus()
+                    ->linkedin('Extra linkedin summary can be passed here')
             ]);
         }
     }
