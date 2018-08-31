@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class ImageServiseProvider extends ServiceProvider
 {
@@ -13,7 +14,11 @@ class ImageServiseProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('layouts.app', 'App\Http\ViewComposers\ImageComposer');
+        // Using class based composers...
+        View::composer(
+            'layouts/app', 'App\Http\ViewComposers\ImageComposer'
+        );
+
     }
 
     /**

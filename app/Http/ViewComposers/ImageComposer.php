@@ -7,29 +7,33 @@
  */
 
 namespace App\Http\ViewComposers;
+use App\Image;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Route;
+use App\Http\Controllers\ImageController;
 
 class ImageComposer
 {
-    protected $srcImage;
-    protected $title;
-    protected $description;
 
+    protected $id;
+    protected $image;
 
     public function __construct()
     {
-        $this->srcImage = 'src';
-        $this->title = 'src';
-        $this->description = 'src';
+        $this->id = Route::current()->parameters();
+        if (!empty($this->id)) {
+            $this->image = ImageController::show($this->id)->getData()['image'][0];
+        }
+
     }
 
     public function compose(View $view)
     {
-        $view->with('image', [
-            'src' => $this->srcImage,
-            'title' => $this->title,
-            'description' => $this->description,
-        ]);
+        if (empty($this->image)) {
+            $view->with('image', $this->image);
+        }
+
     }
 
 }

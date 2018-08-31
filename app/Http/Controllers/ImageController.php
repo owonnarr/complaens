@@ -58,13 +58,11 @@ class ImageController extends Controller
      * @param $id
      */
 
-    public function show($id)
+    public static function show($id)
     {
 
         $oImg = new Image();
         $img = $oImg->getImage($id);
-
-//        dd(Storage::url($img->image));
 
         if (is_object($img)) {
             return view('image.view_page', [
