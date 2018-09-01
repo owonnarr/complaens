@@ -18,8 +18,9 @@ class CreateImageTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('image')->default(null);
-            $table->string('font')->default('Aria');
-            $table->string('watermark')->default(null);
+            $table->string('font')->default('Arial');
+            $table->string('watermark')->default('complaens');
+            $table->string('color')->default('black');
             $table->timestamps();
         });
     }

@@ -35,17 +35,22 @@ class ImageController extends Controller
         # валидация
         $this->validate($request, $aRules);
 
-
-
         $aData = [];
         $aData = $request->all();
 
         # работа с изображением
         $image = $request->file('image');
 
-        $aData['image'] = HelperImage::handleImage($image);
-        $aData['font'] = 'Aria';
-        $aData['watermark'] = 'template';
+        $font = $request->get('font');
+        $color = $request->get('color');
+        $watermark = $request->get('watermark');
+
+        $helperImage = new HelperImage($color, $font, $watermark);
+
+        $aData['image'] = $helperImage->handleImage($image);
+        $aData['font'] = $font;
+        $aData['watermark'] = $watermark;
+        $aData['color'] = $color;
 
         if ($aData['image'] !== false && $aData['image'] !== null) {
             $id = Image::create($aData)->id;

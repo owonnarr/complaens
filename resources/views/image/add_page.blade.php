@@ -30,7 +30,29 @@
                             <p>{{ $errors->first('image') }}</p>
                         @endif
                     </div>
-
+                    <div class="form-group">
+                        <label for="watermark">Водяной знак</label>
+                        <input type="text" class="form-control" name="watermark" placeholder="введите текст">
+                        <div class="radio">
+                            <label style="font-family: 'Arial'"><input type="radio" name="font" value="arial">Шрифт Arial</label>
+                        </div>
+                        <div class="radio">
+                            <label style="font-family: 'Courier'"><input type="radio" name="font" value="Courier">Шрифт Courier</label>
+                        </div>
+                        <div class="radio">
+                            <label style="font-family: 'Roboto bold'"><input type="radio" name="font" value="Roboto-Bold">Шрифт Roboto bold</label>
+                        </div>
+                        <label for="settings">Настройки водяного знака</label>
+                        <div class="radio">
+                            <label style="color: blue"><input type="radio" name="color" value="002480">Цвет синий</label>
+                        </div>
+                        <div class="radio">
+                            <label style="color: black"><input type="radio" name="color" value="000000">Цвет черный</label>
+                        </div>
+                        <div class="radio">
+                            <label style="color: red"><input type="radio" name="color" value="e50017">Цвет красный</label>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         ЗАГРУЗИТЬ
