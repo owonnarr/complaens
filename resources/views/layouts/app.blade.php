@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     @if(isset($image) && !empty($image))
+    <meta property="og:locale" content="ru_RU"/>
     <meta property="og:image" content=" {{ getenv('APP_URL').'/storage/images/'.$image['image']->image }} " />
     <meta property="og:title" content="{{ $image['image']->name }}" />
     <meta property="og:description" content="{{ $image['image']->description }}" />
