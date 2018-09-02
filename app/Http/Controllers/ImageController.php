@@ -30,7 +30,7 @@ class ImageController extends Controller
         $aRules = [
           'name' => 'required|max:20',
           'description' => 'required|max:60',
-          'image' => 'required|mimes:jpeg,jpg,png',
+          'image' => 'required|mimes:jpeg,jpg',
         ];
         # валидация
         $this->validate($request, $aRules);
@@ -53,6 +53,7 @@ class ImageController extends Controller
         $aData['color'] = $color;
 
         if ($aData['image'] !== false && $aData['image'] !== null) {
+
             $id = Image::create($aData)->id;
             return redirect('show'."/{$id}");
 
@@ -72,15 +73,17 @@ class ImageController extends Controller
         $oImg = new Image();
         $img = $oImg->getImage($id);
 
-        if (is_object($img)) {
+        $link = getenv('APP_URL').'/show/'.$img->id;
+        if (is_object($img) && !empty($img) && $img != null) {
             return view('image.view_page', [
                 'image' => $img,
-                'share' => Share::page('http://jorenvanhocht.be', 'Поделиться')
-                    ->facebook('fa-3x')
+                'share' => Share::page($link, 'Поделиться')
+                    ->facebook()
                     ->twitter()
                     ->googlePlus()
                     ->linkedin('Extra linkedin summary can be passed here')
             ]);
         }
     }
+    
 }

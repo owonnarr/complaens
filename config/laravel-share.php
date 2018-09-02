@@ -15,7 +15,7 @@ return [
 
     'services' => [
         'facebook' => [
-            'uri' => 'https://www.facebook.com/sharer/sharer.php?u=',
+            'uri' => 'https://www.facebook.com/sharer/sharer.php?url=',
             'text' => 'Поделиться'
         ],
         'twitter' => [

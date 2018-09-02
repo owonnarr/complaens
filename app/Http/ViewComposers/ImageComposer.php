@@ -21,17 +21,24 @@ class ImageComposer
 
     public function __construct()
     {
+
         $this->id = Route::current()->parameters();
+
         if (!empty($this->id)) {
-            $this->image = ImageController::show($this->id)->getData()['image'][0];
+            $this->id = (int) $this->id['id'];
+            $this->image = ImageController::show($this->id)->getData();
         }
 
     }
 
     public function compose(View $view)
     {
-        if (empty($this->image)) {
-            $view->with('image', $this->image);
+        if (isset($this->image)) {
+
+            $view->with('image', [
+                'image' => $this->image['image'],
+                'share' => $this->image['share'],
+            ]);
         }
 
     }

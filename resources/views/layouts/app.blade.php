@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru" prefix="og: //ogp.me/ns#">
+<html lang="ru" prefix="og: //ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @if($image)
-    <meta property="og:image" content=" {{ getenv('APP_URL').'/storage/images/'.$image->image }} " />
-    <meta property="og:title" content="{{ $image->name }}" />
-    <meta property="og:url" content="{{ getenv('APP_URL').'/show/'.$image->id }}" />
+
+    @if(isset($image) && !empty($image))
+    <meta property="og:image" content=" {{ getenv('APP_URL').'/storage/images/'.$image['image']->image }} " />
+    <meta property="og:title" content="{{ $image['image']->name }}" />
+    <meta property="og:description" content="{{ $image['image']->description }}" />
+    <meta property="og:url" content="{{ getenv('APP_URL').'/show/'.$image['image']->id }}" />
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="300" />
-    @endif
+    <title><?php echo (!empty($image['image']->name)) ? $image['image']->name : 'Страница без данных' ?></title>
+    <meta name="description" lang="ru" content="{{ $image['image']->description }}" />
+
+@endif
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Тестовое задание</title>
