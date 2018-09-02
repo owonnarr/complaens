@@ -30,7 +30,7 @@ class ImageController extends Controller
         $aRules = [
           'name' => 'required|max:20',
           'description' => 'required|max:60',
-          'image' => 'required|mimes:jpeg,jpg',
+          'image' => 'required',
         ];
         # валидация
         $this->validate($request, $aRules);

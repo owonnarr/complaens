@@ -4,7 +4,6 @@
 
     <div class="container">
         <div class="offset-2 col-md-3" >
-            {{--{{ dd($image) }}--}}
             @if($image)
             <img src=" <?php echo (!empty($image)) ? '/storage/images/'.$image->image : asset('no.png') ?>" alt="" class="img-responsive" />
             <div class="caption">
@@ -15,7 +14,9 @@
                 <?php if ($share) {echo $share;}  ?>
             @endif
             </div>
+                <a href="{{ route('uploads') }}" class="btn btn-success">ЗАГРУЗИТЬ СВОЕ ИЗОБРАЖЕНИЕ</a>
         </div>
+
     </div>
 
 @endsection
